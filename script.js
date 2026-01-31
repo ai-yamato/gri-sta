@@ -142,34 +142,94 @@ document.addEventListener('DOMContentLoaded', () => {
         return candidates[0];
     }
 
+    // --- BG Removal Logic ---
+    function removeBackground(ctx, w, h) {
+        const imgData = ctx.getImageData(0, 0, w, h);
+        const data = imgData.data;
+
+        // Sample Top-Left Pixel
+        const bgR = data[0];
+        const bgG = data[1];
+        const bgB = data[2];
+
+        // Threshold (Euclidean distance squared)
+        // A generous threshold to catch compression artifacts
+        const threshold = 30;
+
+        for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+
+            // Simple distance
+            // Math.abs might be faster/easier than euclid for simple check
+            /*
+            const diff = Math.abs(r - bgR) + Math.abs(g - bgG) + Math.abs(b - bgB);
+            if (diff < threshold * 3) { ... } 
+            */
+
+            // Euclidean
+            const dist = Math.sqrt((r - bgR) ** 2 + (g - bgG) ** 2 + (b - bgB) ** 2);
+
+            if (dist < threshold) {
+                data[i + 3] = 0; // Alpha to 0
+            }
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    const bgRemoveCheck = document.getElementById('bg-remove-check');
+
+    // Update renderPreview to use transparency if checked
+    // NOTE: This re-renders everything, might be slow for real-time toggle
+    // For now we just check it during generation or initial render?
+    // User requested "Feature", usually expects it to apply to Preview too.
+
+    // Hack: Re-trigger handleFile/detectPreview is hard without storing state.
+    // We stored `currentImage` and `detectedLayout`. We can re-render.
+    bgRemoveCheck.addEventListener('change', () => {
+        if (currentImage && detectedLayout) {
+            renderPreview(currentImage, detectedLayout);
+        }
+    });
+
     function renderPreview(img, layout) {
         stickerGrid.innerHTML = '';
         previewSection.style.display = 'block';
 
+        const shouldRemoveBg = bgRemoveCheck.checked;
+
         const sw = img.width / layout.cols;
         const sh = img.height / layout.rows;
 
-        // Render Main Preview (First Sticker)
+        // Helper to draw and optionally process
+        const drawProcessed = (targetCtx, w, h, sx, sy, sw, sh) => {
+            targetCtx.imageSmoothingEnabled = true;
+            targetCtx.imageSmoothingQuality = "high";
+            targetCtx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+            if (shouldRemoveBg) {
+                removeBackground(targetCtx, w, h);
+            }
+        };
+
+        // Render Main Preview
         const cMain = document.createElement('canvas');
         cMain.width = MAIN_W;
         cMain.height = MAIN_H;
         const ctxMain = cMain.getContext('2d');
-        ctxMain.imageSmoothingEnabled = true;
-        ctxMain.imageSmoothingQuality = "high";
-        ctxMain.drawImage(img, 0, 0, sw, sh, 0, 0, MAIN_W, MAIN_H);
+        drawProcessed(ctxMain, MAIN_W, MAIN_H, 0, 0, sw, sh); // First Sticker
         previewMain.src = cMain.toDataURL('image/png');
 
-        // Render Tab Preview (First Sticker)
+        // Render Tab Preview
         const cTab = document.createElement('canvas');
         cTab.width = TAB_W;
         cTab.height = TAB_H;
         const ctxTab = cTab.getContext('2d');
-        ctxTab.imageSmoothingEnabled = true;
-        ctxTab.imageSmoothingQuality = "high";
-        ctxTab.drawImage(img, 0, 0, sw, sh, 0, 0, TAB_W, TAB_H);
+        drawProcessed(ctxTab, TAB_W, TAB_H, 0, 0, sw, sh); // First Sticker
         previewTab.src = cTab.toDataURL('image/png');
 
-        // Use a temporary canvas to slice (Sticker Grid)
+        // Sticker Grid
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = sw;
@@ -179,15 +239,22 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let c = 0; c < layout.cols; c++) {
                 const idx = r * layout.cols + c + 1;
 
-                // Clear and Draw slice
                 ctx.clearRect(0, 0, sw, sh);
+                // Draw 1:1 slice
                 ctx.drawImage(img, c * sw, r * sh, sw, sh, 0, 0, sw, sh);
 
-                // Create thumbnail
+                if (shouldRemoveBg) {
+                    removeBackground(ctx, sw, sh);
+                }
+
                 const thumbUrl = canvas.toDataURL('image/png');
 
                 const item = document.createElement('div');
                 item.className = 'sticker-item';
+                // Add checkerboard background to visualize transparency
+                item.style.backgroundImage = 'linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee)';
+                item.style.backgroundSize = '20px 20px';
+                item.style.backgroundPosition = '0 0, 10px 10px';
 
                 const imgEl = document.createElement('img');
                 imgEl.src = thumbUrl;
@@ -214,8 +281,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const { rows, cols, count } = detectedLayout;
             const sw = currentImage.width / cols;
             const sh = currentImage.height / rows;
+            const shouldRemoveBg = bgRemoveCheck.checked;
 
-            // Helper to get Blob from canvas part
+            // Helper to get Blob
             const getBlob = (x, y, w, h, targetW, targetH) => {
                 return new Promise(resolve => {
                     const canvas = document.createElement('canvas');
@@ -223,11 +291,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvas.height = targetH;
                     const ctx = canvas.getContext('2d');
 
-                    // High quality scaling
                     ctx.imageSmoothingEnabled = true;
                     ctx.imageSmoothingQuality = "high";
 
                     ctx.drawImage(currentImage, x, y, w, h, 0, 0, targetW, targetH);
+
+                    if (shouldRemoveBg) {
+                        removeBackground(ctx, targetW, targetH);
+                    }
 
                     canvas.toBlob(blob => {
                         resolve(blob);
@@ -245,18 +316,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // main.png (first sticker)
+            // main.png
             const mainBlob = await getBlob(0, 0, sw, sh, MAIN_W, MAIN_H);
             zip.file('main.png', mainBlob);
 
-            // tab.png (first sticker)
+            // tab.png
             const tabBlob = await getBlob(0, 0, sw, sh, TAB_W, TAB_H);
             zip.file('tab.png', tabBlob);
 
             // Generate ZIP
             const content = await zip.generateAsync({ type: "blob" });
 
-            // Trigger Download
             const url = URL.createObjectURL(content);
             const a = document.createElement('a');
             const baseName = originalFile.name.split('.')[0];

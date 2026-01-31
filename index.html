@@ -37,7 +37,7 @@
     <div class="container">
         <header id="hero" class="hero-section">
             <div class="hero-content">
-                <h1>1枚の画像から<br>LINEスタンプを一括生成</h1>
+                <h1>1枚の画像からLINEスタンプを一括生成</h1>
                 <p>ChatGPTやNano Banana Proで生成した「スタンプ用グリッド画像」をドラッグするだけ。<br>
                     8個から40個まで、好きな数で。レイアウトを自動検出し、申請用ZIPを即座に作成します。</p>
             </div>
@@ -111,100 +111,115 @@
                         ZIPファイル出力
                     </label>
                 </div>
-            </section>
+                <div class="settings-row" style="margin-top: 16px;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="bg-remove-check">
+                        <span class="checkmark"></span>
+                        背景を透過する (自動検出)
+                    </label>
+                </div>
+    </div>
+    </section>
 
-            <!-- Generate Button -->
-            <button id="generate-btn" class="generate-btn" disabled>パッケージを生成</button>
-            <div id="status-message" class="status-message">準備完了</div>
-        </main>
+    <!-- Generate Button -->
+    <button id="generate-btn" class="generate-btn" disabled>パッケージを生成</button>
+    <div id="status-message" class="status-message">準備完了</div>
+    </main>
 
-        <!-- Recommended Section -->
-        <section id="recommend" class="lp-section recommend-section">
-            <div class="recommend-header">
-                <h2>こんな方におすすめ</h2>
-                <p>クリエイティブな制作時間を、もっと大切にしたいあなたへ。</p>
-            </div>
-            <div class="recommend-grid">
-                <div class="recommend-card">
-                    <img src="assets/images/icon_ai_user.png" alt="AI User" class="recommend-icon">
-                    <h3>生成AIユーザー</h3>
-                    <p>ChatGPTやNano Banana Proなどで生成された「4分割グリッド画像」を、一発でスタンプに変換できます。</p>
-                </div>
-                <div class="recommend-card">
-                    <img src="assets/images/icon_clock.png" alt="Time Saving" class="recommend-icon">
-                    <h3>時短したい方</h3>
-                    <p>40画像の書き出し、リネーム、サイズ調整...面倒な単純作業はすべてグリスタにお任せ。</p>
-                </div>
-                <div class="recommend-card">
-                    <img src="assets/images/icon_tablet.png" alt="No PC Required" class="recommend-icon">
-                    <h3>PC作業が苦手な方</h3>
-                    <p>Photoshopなどの高価なソフトは不要。ブラウザだけで完結するのでスマホでもOK。</p>
-                </div>
-            </div>
-        </section>
+    <!-- Recommended Section -->
+    <section id="recommend" class="lp-section">
+        <div class="container">
+            <h2>こんな方におすすめ</h2>
+            <p>クリエイティブな制作時間を、もっと大切にしたいあなたへ。</p>
 
-        <!-- Features Section -->
-        <section id="features" class="lp-section">
-            <div class="features-header">
-                <h2>グリスタ が選ばれる理由</h2>
-                <p>スタンプ制作の「面倒くさい」をすべて解消しました。</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <img src="assets/images/icon_rocket.png" alt="Batch Creation" class="feature-icon">
-                    <h3>一瞬で40個切り出し</h3>
-                    <p>画像を1枚用意するだけ。AIアルゴリズムがグリッドを自動検出し、全てのスタンプを一括で切り出します。</p>
+            <div class="grid-3">
+                <div class="glass-card">
+                    <img src="assets/images/icon_ai_user.png" alt="AI User" class="card-icon">
+                    <div class="card-title">生成AIユーザー</div>
+                    <div class="card-text">ChatGPTやNano Banana Proなどで生成された「4分割グリッド画像」を、一発でスタンプに変換できます。</div>
                 </div>
-                <div class="feature-card">
-                    <img src="assets/images/icon_verified.png" alt="Standard Compliant" class="feature-icon">
-                    <h3>LINE規格に完全準拠</h3>
-                    <p>メイン画像・タブ画像・スタンプ画像(xx.png)を、LINE Creators Marketの申請規格に合わせて自動生成。</p>
+                <div class="glass-card">
+                    <img src="assets/images/icon_clock.png" alt="Time Saving" class="card-icon">
+                    <div class="card-title">時短したい方</div>
+                    <div class="card-text">40画像の書き出し、リネーム、サイズ調整...面倒な単純作業はすべてグリスタにお任せ。</div>
                 </div>
-                <div class="feature-card">
-                    <img src="assets/images/icon_zip.png" alt="ZIP Download" class="feature-icon">
-                    <h3>即アップロード可能</h3>
-                    <p>生成データは整理されたZIPファイルでダウンロード。解凍してそのままアップロード画面へ。</p>
-                </div>
-                <div class="feature-card">
-                    <img src="assets/images/icon_lock.png" alt="Secure" class="feature-icon">
-                    <h3>安心のプライバシー</h3>
-                    <p>サーバーへのアップロードは一切なし。全ての画像処理はお使いの端末内で完結するため安全です。</p>
+                <div class="glass-card">
+                    <img src="assets/images/icon_tablet.png" alt="No PC Required" class="card-icon">
+                    <div class="card-title">PC作業が苦手な方</div>
+                    <div class="card-text">Photoshopなどの高価なソフトは不要。ブラウザだけで完結するのでスマホでもOK。</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- LP Content -->
-        <section id="how-to" class="lp-section">
+    <!-- Features Section -->
+    <section id="features" class="lp-section">
+        <div class="container">
+            <h2>グリスタ が選ばれる理由</h2>
+            <p>スタンプ制作の「面倒くさい」をすべて解消しました。</p>
+
+            <div class="grid-2">
+                <div class="glass-card feature-card-item">
+                    <img src="assets/images/icon_rocket.png" alt="Batch Creation" class="card-icon">
+                    <div class="card-title">一瞬で40個切り出し</div>
+                    <div class="card-text">画像を1枚用意するだけ。AIアルゴリズムがグリッドを自動検出し、全てのスタンプを一括で切り出します。</div>
+                </div>
+                <div class="glass-card feature-card-item">
+                    <img src="assets/images/icon_verified.png" alt="Standard Compliant" class="card-icon">
+                    <div class="card-title">LINE規格に完全準拠</div>
+                    <div class="card-text">メイン画像・タブ画像・スタンプ画像(xx.png)を、LINE Creators Marketの申請規格に合わせて自動生成。</div>
+                </div>
+                <div class="glass-card feature-card-item">
+                    <img src="assets/images/icon_zip.png" alt="ZIP Download" class="card-icon">
+                    <div class="card-title">即アップロード可能</div>
+                    <div class="card-text">生成データは整理されたZIPファイルでダウンロード。解凍してそのままアップロード画面へ。</div>
+                </div>
+                <div class="glass-card feature-card-item">
+                    <img src="assets/images/icon_lock.png" alt="Secure" class="card-icon">
+                    <div class="card-title">安心のプライバシー</div>
+                    <div class="card-text">サーバーへのアップロードは一切なし。全ての画像処理はお使いの端末内で完結するため安全です。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LP Content (Steps) -->
+    <section id="how-to" class="lp-section">
+        <div class="container">
             <h2>使い方</h2>
-            <div class="steps-grid">
-                <div class="step-card">
+            <p>たったの4ステップで完了します。</p>
+            <div class="grid-4">
+                <div class="glass-card">
                     <div class="step-num">01</div>
-                    <img src="assets/images/step01.svg" class="step-icon" alt="Step 1">
-                    <h3>画像を用意</h3>
-                    <p>スタンプを並べた1枚の画像（PNG/JPG）を用意します。</p>
+                    <img src="assets/images/step01.svg" class="card-icon" alt="Step 1">
+                    <div class="card-title">画像を用意</div>
+                    <div class="card-text">スタンプを並べた1枚の画像（PNG/JPG）を用意します。</div>
                 </div>
-                <div class="step-card">
+                <div class="glass-card">
                     <div class="step-num">02</div>
-                    <img src="assets/images/step02.svg" class="step-icon" alt="Step 2">
-                    <h3>アップロード</h3>
-                    <p>画像をドロップエリアにドラッグ＆ドロップします。</p>
+                    <img src="assets/images/step02.svg" class="card-icon" alt="Step 2">
+                    <div class="card-title">アップロード</div>
+                    <div class="card-text">画像をドロップエリアにドラッグ＆ドロップします。</div>
                 </div>
-                <div class="step-card">
+                <div class="glass-card">
                     <div class="step-num">03</div>
-                    <img src="assets/images/step03.svg" class="step-icon" alt="Step 3">
-                    <h3>プレビュー</h3>
-                    <p>自動で分割され、レイアウトが正しいか確認します。</p>
+                    <img src="assets/images/step03.svg" class="card-icon" alt="Step 3">
+                    <div class="card-title">プレビュー</div>
+                    <div class="card-text">自動で分割され、レイアウトが正しいか確認します。</div>
                 </div>
-                <div class="step-card">
+                <div class="glass-card">
                     <div class="step-num">04</div>
-                    <img src="assets/images/step04.svg" class="step-icon" alt="Step 4">
-                    <h3>ダウンロード</h3>
-                    <p>「生成」ボタンを押してZIPファイルを保存します。</p>
+                    <img src="assets/images/step04.svg" class="card-icon" alt="Step 4">
+                    <div class="card-title">ダウンロード</div>
+                    <div class="card-text">「生成」ボタンを押してZIPファイルを保存します。</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="faq" class="lp-section">
+    <!-- FAQ -->
+    <section id="faq" class="lp-section">
+        <div class="container">
             <h2>Q&A (よくある質問)</h2>
             <div class="faq-list">
                 <div class="faq-item">
@@ -220,17 +235,18 @@
                     <div class="faq-a">A. いいえ。全ての処理はブラウザ内（端末内）で行われるため、画像が外部に流出することはありません。安全です。</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <div class="footer-content">
-                <p>&copy; 2026 グリスタ. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="terms.html">利用規約</a>
-                    <a href="privacy.html">プライバシーポリシー</a>
-                </div>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 グリスタ. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="terms.html">利用規約</a>
+                <a href="privacy.html">プライバシーポリシー</a>
             </div>
-        </footer>
+        </div>
+    </footer>
     </div>
 
     <script src="script.js"></script>
