@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>グリスタ (Gri-Sta) - LINEスタンプ一括作成ツール</title>
-    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <title>グリスタ - LINEスタンプ一括作成ツール</title>
+    <link rel="icon" type="image/png" href="assets/images/icon.png">
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts for modern typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,9 +22,9 @@
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo">
-                <img src="assets/images/logo.png" alt="Grista"
+                <img src="assets/images/icon.png" alt="Grista"
                     style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px; margin-bottom: 4px; border-radius: 6px;">
-                グリスタ.
+                グリスタ
             </div>
             <div class="nav-links">
                 <a href="#hero">TOP</a>
@@ -37,8 +37,9 @@
     <div class="container">
         <header id="hero" class="hero-section">
             <div class="hero-content">
-                <h1>グリスタ.</h1>
-                <p>グリッド画像から、LINEスタンプ申請用データを一瞬で作成。<br>全自動でレイアウトを検出・分割します。</p>
+                <h1>1枚の画像から<br>LINEスタンプを一括生成</h1>
+                <p>ChatGPTやNano Banana Proで生成した「スタンプ用グリッド画像」をドラッグするだけ。<br>
+                    8個から40個まで、好きな数で。レイアウトを自動検出し、申請用ZIPを即座に作成します。</p>
             </div>
             <div class="hero-visual">
                 <div class="visual-card">
@@ -117,32 +118,57 @@
             <div id="status-message" class="status-message">準備完了</div>
         </main>
 
+        <!-- Recommended Section -->
+        <section id="recommend" class="lp-section recommend-section">
+            <div class="recommend-header">
+                <h2>こんな方におすすめ</h2>
+                <p>クリエイティブな制作時間を、もっと大切にしたいあなたへ。</p>
+            </div>
+            <div class="recommend-grid">
+                <div class="recommend-card">
+                    <img src="assets/images/icon_ai_user.png" alt="AI User" class="recommend-icon">
+                    <h3>生成AIユーザー</h3>
+                    <p>ChatGPTやNano Banana Proなどで生成された「4分割グリッド画像」を、一発でスタンプに変換できます。</p>
+                </div>
+                <div class="recommend-card">
+                    <img src="assets/images/icon_clock.png" alt="Time Saving" class="recommend-icon">
+                    <h3>時短したい方</h3>
+                    <p>40画像の書き出し、リネーム、サイズ調整...面倒な単純作業はすべてグリスタにお任せ。</p>
+                </div>
+                <div class="recommend-card">
+                    <img src="assets/images/icon_tablet.png" alt="No PC Required" class="recommend-icon">
+                    <h3>PC作業が苦手な方</h3>
+                    <p>Photoshopなどの高価なソフトは不要。ブラウザだけで完結するのでスマホでもOK。</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Features Section -->
         <section id="features" class="lp-section">
             <div class="features-header">
-                <h2>Gri-Sta が選ばれる理由</h2>
-                <p>面倒な作業はすべて自動化。クリエイティブな制作に集中できます。</p>
+                <h2>グリスタ が選ばれる理由</h2>
+                <p>スタンプ制作の「面倒くさい」をすべて解消しました。</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3>一括作成</h3>
-                    <p>画像を1枚用意するだけ。最大40個のスタンプを、AIアルゴリズムが一瞬で切り出します。</p>
+                    <img src="assets/images/icon_rocket.png" alt="Batch Creation" class="feature-icon">
+                    <h3>一瞬で40個切り出し</h3>
+                    <p>画像を1枚用意するだけ。AIアルゴリズムがグリッドを自動検出し、全てのスタンプを一括で切り出します。</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">✅</div>
-                    <h3>規格準拠</h3>
-                    <p>申請に必要なメイン画像・タブ画像・スタンプ画像を、LINE Creator Marketの規格に合わせて自動生成します。</p>
+                    <img src="assets/images/icon_verified.png" alt="Standard Compliant" class="feature-icon">
+                    <h3>LINE規格に完全準拠</h3>
+                    <p>メイン画像・タブ画像・スタンプ画像(xx.png)を、LINE Creators Marketの申請規格に合わせて自動生成。</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📦</div>
-                    <h3>ZIP一発保存</h3>
-                    <p>生成されたデータは整理されたZIPファイルでダウンロード。解凍してそのままアップロードできます。</p>
+                    <img src="assets/images/icon_zip.png" alt="ZIP Download" class="feature-icon">
+                    <h3>即アップロード可能</h3>
+                    <p>生成データは整理されたZIPファイルでダウンロード。解凍してそのままアップロード画面へ。</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>安心セキュリティ</h3>
-                    <p>サーバーへのアップロードは一切行いません。全ての画像処理はあなたのブラウザ内で完結します。</p>
+                    <img src="assets/images/icon_lock.png" alt="Secure" class="feature-icon">
+                    <h3>安心のプライバシー</h3>
+                    <p>サーバーへのアップロードは一切なし。全ての画像処理はお使いの端末内で完結するため安全です。</p>
                 </div>
             </div>
         </section>
@@ -198,10 +224,10 @@
 
         <footer>
             <div class="footer-content">
-                <p>&copy; 2026 Gri-Sta (グリスタ). All rights reserved.</p>
+                <p>&copy; 2026 グリスタ. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="#">利用規約</a>
-                    <a href="#">プライバシーポリシー</a>
+                    <a href="terms.html">利用規約</a>
+                    <a href="privacy.html">プライバシーポリシー</a>
                 </div>
             </div>
         </footer>

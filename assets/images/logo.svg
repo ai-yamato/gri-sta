@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="white"/>
+  <rect x="86" y="86" width="160" height="160" rx="32" fill="#06C755"/>
+  <rect x="266" y="86" width="160" height="160" rx="32" fill="#06C755"/>
+  <rect x="86" y="266" width="160" height="160" rx="32" fill="#06C755"/>
+  
+  <!-- Stickering effect on bottom right -->
+  <path d="M266 298C266 280.327 280.327 266 298 266H394C411.673 266 426 280.327 426 298V394C426 411.673 411.673 426 394 426H350L266 342V298Z" fill="#06C755"/>
+  <path d="M266 426V342L350 426H266Z" fill="#049941"/>
+</svg>
